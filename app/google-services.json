@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "105771089927",
+    "firebase_url": "https://fir-carddatabase.firebaseio.com",
+    "project_id": "fir-carddatabase",
+    "storage_bucket": "fir-carddatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105771089927:android:438b904ac99bb201",
+        "android_client_info": {
+          "package_name": "com.example.firebasecarddatabase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105771089927-m5a9bhq1ie70e91sl08n92hknv7nompc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebasecarddatabase",
+            "certificate_hash": "ca141fb5c5f3557bc7bccb0211b2afe41b982717"
+          }
+        },
+        {
+          "client_id": "105771089927-qu9b1t7paaqba92db3ta8g1srefal5g0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOTAOdobqabzWrC7NHjuqflEG3W0NhRzM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105771089927-qu9b1t7paaqba92db3ta8g1srefal5g0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
