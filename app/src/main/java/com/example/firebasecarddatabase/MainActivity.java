@@ -22,6 +22,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 /*  SOURCES
 // Reading and Writing to a Firebase Realtime Database:                   https://firebase.google.com/docs/database/android/read-and-write
 // Reading in a JSON Tree Structure and displaying cards in a list:       https://www.youtube.com/watch?v=jEmq1B1gveM
@@ -32,8 +33,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
     DatabaseReference dbCardReference;
-    ArrayList<Card> alCards = new ArrayList<>();
-    //ArrayAdapter<Card> aaCards = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, alCards);
+    List<Card> lCards = new ArrayList<>();
+    //ArrayAdapter<Card> aaCards;// = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, alCards);
     EditText editTextName, editTextPower, editTextToughness, editTextCMC;
     Spinner spinnerSets;
     Button btnAddCard;
@@ -52,8 +53,8 @@ public class MainActivity extends Activity {
         btnAddCard = (Button) findViewById(R.id.buttonAddCard);
         lvCards = (ListView) findViewById(R.id.listViewCards);
         spinnerSets = (Spinner) findViewById(R.id.spinnerSets);
-        //lvCards.setTextFilterEnabled(true);
-        //lvCards.setAdapter(aaCards);
+        //aaCards = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, alCards);
+
 
         btnAddCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +75,13 @@ public class MainActivity extends Activity {
         dbCardReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                alCards.clear();
+                lCards.clear();
                 for (DataSnapshot cardSnapshot : dataSnapshot.getChildren()) {
                     Card tCard = cardSnapshot.getValue(Card.class);
-                    alCards.add(tCard);
+                    lCards.add(tCard);
                 }
-
+                CardList clAdapter = new CardList(MainActivity.this, lCards);
+                lvCards.setAdapter(clAdapter);
             }
 
             @Override
@@ -89,16 +91,10 @@ public class MainActivity extends Activity {
         });
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }*/
-
 
     public void addCard(String name, String set, int cmc, int power, int toughness) { //Named so it looks formal in the firebase console
         Card tCard = new Card(name, /*id,*/ set, cmc, power, toughness);
-        alCards.add(tCard);
+        lCards.add(tCard);
         dbCardReference.child(name).setValue(tCard);
     }
 
