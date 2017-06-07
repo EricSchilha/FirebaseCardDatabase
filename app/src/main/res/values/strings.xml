@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">FirebaseCardDatabase</string>
+
+    <array name="sets">
+        <item>Amonkhet</item>
+        <item>Aether Revolt</item>
+        <item>Kaladesh</item>
+        <item>Eldritch Moon</item>
+        <item>Shadows Over Innistrad</item>
+        <item>Oath of the Gatewatch</item>
+        <item>Battle for Zendikar</item>
+    </array>
 </resources>

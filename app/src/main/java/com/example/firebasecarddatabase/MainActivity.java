@@ -1,12 +1,17 @@
 package com.example.firebasecarddatabase;
 
+import android.app.Activity;
+import android.app.ListActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,12 +30,42 @@ import java.util.ArrayList;
 //
 */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     DatabaseReference dbCardReference;
     ArrayList<Card> alCards = new ArrayList<>();
-    EditText editText;
+    //ArrayAdapter<Card> aaCards = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, alCards);
+    EditText editTextName, editTextPower, editTextToughness, editTextCMC;
+    Spinner spinnerSets;
     Button btnAddCard;
     ListView lvCards;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        dbCardReference = FirebaseDatabase.getInstance().getReference("cards");
+        editTextName = (EditText) findViewById(R.id.editText);
+        editTextPower = (EditText) findViewById(R.id.editText2);
+        editTextToughness = (EditText) findViewById(R.id.editText3);
+        editTextCMC = (EditText) findViewById(R.id.editText4);
+        btnAddCard = (Button) findViewById(R.id.buttonAddCard);
+        lvCards = (ListView) findViewById(R.id.listViewCards);
+        spinnerSets = (Spinner) findViewById(R.id.spinnerSets);
+        //lvCards.setTextFilterEnabled(true);
+        //lvCards.setAdapter(aaCards);
+
+        btnAddCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCard(editTextName.getText().toString(), spinnerSets.getSelectedItem().toString(), Integer.parseInt(editTextCMC.getText().toString()), Integer.parseInt(editTextPower.getText().toString()), Integer.parseInt(editTextToughness.getText().toString()));
+            }
+        });
+
+        //ADD CARDS
+        addCard("Storm Crow", "7th Edition", 1, 2, 2);
+        addCard("Alpha Tyrranax", "Scars of Mirrodin", 6, 5, 6);
+    }
 
     @Override
     protected void onStart() {
@@ -44,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     Card tCard = cardSnapshot.getValue(Card.class);
                     alCards.add(tCard);
                 }
+
             }
 
             @Override
@@ -53,26 +89,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        dbCardReference = FirebaseDatabase.getInstance().getReference("cards");
-        editText = (EditText) findViewById(R.id.editText);
-        btnAddCard = (Button) findViewById(R.id.buttonAddCard);
-        lvCards = (ListView) findViewById(R.id.listViewCards);
-        btnAddCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addCard(editText.getText().toString(), "", 0, 0, 0);
-            }
-        });
-
-        //ADD CARDS
-        addCard("Storm Crow", "7th Edition", 1, 2, 2);
-        addCard("Alpha Tyrranax", "Scars of Mirrodin", 6, 5, 6);
-    }
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }*/
 
 
     public void addCard(String name, String set, int cmc, int power, int toughness) { //Named so it looks formal in the firebase console
