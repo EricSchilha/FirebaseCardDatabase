@@ -79,6 +79,7 @@ public class MainActivity extends Activity {
                 for (DataSnapshot cardSnapshot : dataSnapshot.getChildren()) {
                     Card tCard = cardSnapshot.getValue(Card.class);
                     lCards.add(tCard);
+                    //editTextName.setText(lCards.get(0).sSet);
                 }
                 CardList clAdapter = new CardList(MainActivity.this, lCards);
                 lvCards.setAdapter(clAdapter);

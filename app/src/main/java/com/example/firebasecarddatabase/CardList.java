@@ -19,6 +19,7 @@ import java.util.List;
 public class CardList extends ArrayAdapter<Card> {
     private Activity context;
     private List<Card> lCards;
+    String sName;
 
     public CardList(Activity context, List<Card> lCards){
         super(context, R.layout.list_layout, lCards);
@@ -38,9 +39,8 @@ public class CardList extends ArrayAdapter<Card> {
 
         Card tCard = lCards.get(position);
 
-        tvName.setText(tCard.getName());
-        tvSet.setText(tCard.getSet());
-
+        tvName.setText(tCard.sName);
+        tvSet.setText(tCard.sSet);
         return lvItem;
     }
 }

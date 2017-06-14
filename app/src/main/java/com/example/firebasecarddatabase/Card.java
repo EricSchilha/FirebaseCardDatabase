@@ -5,12 +5,12 @@ package com.example.firebasecarddatabase;
  */
 
 public class Card {
-    private String sName;
+    String sName;
     //private String sID;
-    private String sSet;
-    private int nCMC;//Converted Mana Cost
-    private int nPower;
-    private int nToughness;
+    String sSet;
+    int nCMC;//Converted Mana Cost
+    int nPower;
+    int nToughness;//These should be private, but that was causing problems
 
     public Card(){}//Needed for datasnapshot.getValue()
 
@@ -22,15 +22,11 @@ public class Card {
         this.nToughness = nToughness;
         this.sSet = sSet;
     }
-
-    public String getName(){
+//Methods below don't work for what they were supposed to do
+/*    public String getName(){
         return sName;
     }
-/*
-    public String getID() {
-        return sID;
-    }
-*/
+
     public String getSet() {
         return sSet;
     }
@@ -46,4 +42,5 @@ public class Card {
     public int getToughness() {
         return nToughness;
     }
+    */
 }
